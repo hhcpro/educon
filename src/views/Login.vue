@@ -3,7 +3,7 @@
         <form @submit.prevent="login">
             <h2>Login</h2>
             <input
-                type="text"
+                type="email"
                 v-model="email"
                 placeholder="Email address..."
             />
@@ -32,7 +32,7 @@ export default {
             try {
                 const user = await Auth.signIn(this.email, this.password);
                 console.log('user', user);
-                alert('Successfully logged in');
+                alert('Successfully logged in'); 
             } catch (error) {
                 alert(error.message);
             }
