@@ -11,6 +11,8 @@ type VideosMetaData = {
 export declare class Videos {
   readonly id: string;
   readonly filename?: string;
+  readonly category?: string;
+  readonly URL?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Videos, VideosMetaData>);

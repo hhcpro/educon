@@ -7,16 +7,20 @@
                     <thead>
                         <tr>
                             <th scope='col'>ID</th>
+                            <th scope="col">Category</th>
                             <th scope='col'>Name (Alias)</th>
                             <th scope='col'>Creation Date</th>
+                            <th scope="col">URL</th>
                         </tr>
 
                     </thead>
                     <tbody>
                         <tr v-for="(column, index) in myVideos" :key="column.id">   
                             <td>{{ index }} </td>
+                            <td>{{ column.category }}</td>
                             <td>{{ column.filename }}</td>
                             <td>{{ column.createdAt }}</td>
+                            <td>{{ column.URL }}</td>
                         </tr>
                     </tbody>
                 </table>
