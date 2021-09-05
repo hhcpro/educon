@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "educon",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "autheducon5cb0e260",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

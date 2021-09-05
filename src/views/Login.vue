@@ -3,7 +3,7 @@
         <form @submit.prevent="login">
             <h2>Login</h2>
             <input
-                type="email"
+                type="text"
                 v-model="email"
                 placeholder="Email address..."
             />
