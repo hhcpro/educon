@@ -25,6 +25,23 @@
                     </tbody>
                 </table>
         </form>
+        <form @submit.prevent="updateList">
+            <button>Add New record</button>
+            <table>
+                <thead>
+                        <tr>
+                            <th scope="col">Category</th>
+                            <th scope='col'>Name (Alias)</th>
+                            <th scope="col">URL</th>
+                        </tr>
+                </thead>
+                <td><input class='input' v-model="category" placeholder="Add Catrgory"></td>
+                <td><input class="input" v-model="filename" placeholder="Add filename"></td>
+                <td><input class="input" v-model="urllink" placeholder="Add URL"></td>
+            </table>
+            <p>TEST INPUT: Categoty [{{ category }}], and URL: [{{ urllink }}]
+            </p>
+        </form>
     </div>
 </template>
 
@@ -41,6 +58,9 @@ export default {
         console.log("Calling data");
         return {
             myVideos: [],
+            category: '',
+            filename: '',
+            urllink: ''
         }
     },
 
@@ -51,7 +71,7 @@ export default {
         async videos() {
             console.log('Calling videos');
             try {
-                let myVideos = await DataStore.query(Videos);
+                const myVideos = await DataStore.query(Videos);
                 console.log(myVideos);
                 console.log('length is ',myVideos.length)
                 this.myVideos = myVideos;
@@ -59,6 +79,30 @@ export default {
             catch(error) {
                 alert(error.message);
             }
+        },
+        updateList() {
+            console.log('updating...');
+            console.log('Category: ', this.category);
+            console.log('Filename: ', this.filename)
+            console.log('URL: ', this.urllink);
+
+            if(this.filename === undefined) {
+                this.filename = 'not used'
+            }
+            try {
+            DataStore.save(
+                new Videos({
+                    "filename": this.filename,
+                    "category" : this.category,
+                    "URL": this.urllink
+                })
+            );
+            this.videos()
+            }
+            catch(error) {
+                alert(error.message);
+            }
+            
         }
     }
 }
