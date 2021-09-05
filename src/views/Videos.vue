@@ -1,11 +1,10 @@
 <template>
     <div class="container">
-        
         <form @submit.prevent="videos">
             <button>Get List of Classes</button>
             <h1>Catalog</h1>
-            <div v-for="item in models" :key="item.id">
-                <h3>{{ item.filename }}</h3>
+            <div v-for="video in myVideos" :key="video.id">
+                <h3>{{ video.filename }}</h3>
             </div>
         </form>
     </div>
@@ -17,20 +16,27 @@
 import { DataStore } from '@aws-amplify/datastore';
 import { Videos } from '../models';
 
+
 export default {
     name: 'Videos',
     data() {
         console.log("Calling data");
         return {
-            models: undefined,
-        };
+            myVideos: [],
+        }
+    },
+
+    created(){
+        this.myVideos = this.videos();
     },
     methods: {
         async videos() {
             console.log('Calling videos');
             try {
-                const models = await DataStore.query(Videos);
-                console.log(models);
+                let myVideos = await DataStore.query(Videos);
+                console.log(myVideos);
+                console.log('length is ',myVideos.length)
+                this.myVideos = myVideos;
             }
             catch(error) {
                 alert(error.message);
@@ -39,3 +45,15 @@ export default {
     }
 }
 </script>
+
+<style  scope>
+form {
+    
+    justify-content: left;
+    align-items: left;
+    align-self:baseline;
+    margin-bottom: 20px;
+    color: brown;
+    background-image: radial-gradient();
+}
+</style>
