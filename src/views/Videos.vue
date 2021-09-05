@@ -1,11 +1,12 @@
 <template>
     <div class="container">
+        
         <form @submit.prevent="videos">
-            <h1>Videos</h1>
+            <button>Get List of Classes</button>
+            <h1>Catalog</h1>
             <div v-for="item in models" :key="item.id">
                 <h3>{{ item.filename }}</h3>
             </div>
-            <button>Videos</button>
         </form>
     </div>
 </template>
