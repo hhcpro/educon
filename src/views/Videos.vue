@@ -3,8 +3,9 @@
         <form @submit.prevent="videos">
             <h1>Videos</h1>
             <div v-for="item in models" :key="item.id">
-                <h3>{{ item.name }}</h3>
+                <h3>{{ item.filename }}</h3>
             </div>
+            <button>Videos</button>
         </form>
     </div>
 </template>
@@ -19,9 +20,8 @@ export default {
     name: 'Videos',
     data() {
         console.log("Calling data");
-        this.videos();
         return {
-            models: '',
+            models: undefined,
         };
     },
     methods: {
