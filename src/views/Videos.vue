@@ -3,24 +3,24 @@
         <form @submit.prevent="videos">
             <button>Get List of Classes</button>
             <h1>Catalog</h1>
-            
-            <!--div v-for="video in myVideos" :key="video.id">
-                <h3>{{ video.filename }}</h3>  
-            </div-->
             <table class="table">
                     <thead>
                         <tr>
                             <th scope='col'>ID</th>
+                            <th scope="col">Category</th>
                             <th scope='col'>Name (Alias)</th>
                             <th scope='col'>Creation Date</th>
+                            <th scope="col">URL</th>
                         </tr>
 
                     </thead>
                     <tbody>
                         <tr v-for="(column, index) in myVideos" :key="column.id">   
                             <td>{{ index }} </td>
+                            <td>{{ column.category }}</td>
                             <td>{{ column.filename }}</td>
                             <td>{{ column.createdAt }}</td>
+                            <td>{{ column.URL }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -71,7 +71,7 @@ form {
     align-items: left;
     align-self:baseline;
     margin-bottom: 20px;
-    color: brown;
+    color: green;
     background-image: radial-gradient();
 }
 table {
@@ -103,8 +103,4 @@ table tbody tr:nth-child(2n) td {
   background: #D4D8F9;
 }
 
-button {
-    color: darkblue;
-    text-emphasis-color: red;
-}
 </style>
