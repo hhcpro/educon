@@ -1,0 +1,4 @@
+type Videos @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  filename: String
+}

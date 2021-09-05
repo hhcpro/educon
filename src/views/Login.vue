@@ -31,8 +31,8 @@ export default {
         async login() {
             try {
                 const user = await Auth.signIn(this.email, this.password);
-                console.log('user', user);
-                alert('Successfully logged in');
+                console.log('the user', user);
+                alert('Successfully logged in'); 
             } catch (error) {
                 alert(error.message);
             }

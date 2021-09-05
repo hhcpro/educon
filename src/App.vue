@@ -5,6 +5,7 @@
             <router-link to="/about">About</router-link> |
             <router-link to="/register">Register</router-link> |
             <router-link to="/login">Login</router-link> |
+            <router-link to="/videos">Videos</router-link>
             <button @click="logout">Logout</button>
         </div>
         <router-view />
