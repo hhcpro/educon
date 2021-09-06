@@ -42,6 +42,23 @@
             <p>TEST INPUT: Categoty [{{ category }}], and URL: [{{ urllink }}]
             </p>
         </form>
+        <form @submit.prevent="getcatalog">
+            <h1>Get from REST API</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Category</th>
+                        <th scope="col">URL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr v-for="(column) in myVideos" :key="column.id">   
+                            <td>{{ column.category }}</td> 
+                            <td>{{ column.URL }}</td>
+                        </tr>
+                    </tbody>
+            </table>
+        </form>
     </div>
 </template>
 
@@ -50,6 +67,7 @@
 
 import { DataStore } from '@aws-amplify/datastore';
 import { Videos } from '../models';
+import { API } from 'aws-amplify';
 
 
 export default {
@@ -60,7 +78,9 @@ export default {
             myVideos: [],
             category: '',
             filename: '',
-            urllink: ''
+            urllink: '',
+            rest_category: '',
+            rest_url: ''
         }
     },
 
@@ -103,6 +123,20 @@ export default {
                 alert(error.message);
             }
             
+        },
+        getcatalog(){
+            console.log('rest get catalog called')
+            const apiName = 'catalogcapacity';
+            const path = '/clist'; 
+            const myInit = { // OPTIONAL
+                headers: {}, // OPTIONAL
+                response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
+                queryStringParameters: {  // OPTIONAL
+                    name: 'URL',
+                },
+            };
+
+            API.get(apiName, path, myInit)
         }
     }
 }
