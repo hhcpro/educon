@@ -67,7 +67,7 @@
 
 import { DataStore } from '@aws-amplify/datastore';
 import { Videos } from '../models';
-import { API } from 'aws-amplify';
+//import { API } from 'aws-amplify';
 
 
 export default {
@@ -126,17 +126,17 @@ export default {
         },
         getcatalog(){
             console.log('rest get catalog called')
-            const apiName = 'catalogcapacity';
-            const path = '/clist'; 
-            const myInit = { // OPTIONAL
-                headers: {}, // OPTIONAL
-                response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
-                queryStringParameters: {  // OPTIONAL
-                    name: 'URL',
-                },
-            };
+            //const apiName = 'catalogcapacity';
+            //const path = '/clist'; 
+            //const myInit = { // OPTIONAL
+            //    headers: {}, // OPTIONAL
+            //    response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
+            //    queryStringParameters: {  // OPTIONAL
+            //        name: 'URL',
+            //    },
+            //};
 
-            API.get(apiName, path, myInit)
+            //API.get(apiName, path, myInit)
         }
     }
 }

@@ -18,7 +18,7 @@
       "function": {
         "catalogcapacity": {
           "deploymentBucketName": "amplify-educon-dev-164213-deployment",
-          "s3Key": "amplify-builds/catalogcapacity-7053397770307356526b-build.zip"
+          "s3Key": "amplify-builds/catalogcapacity-427747547a7739375a58-build.zip"
         }
       }
     }
