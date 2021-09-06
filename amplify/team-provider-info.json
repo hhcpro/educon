@@ -14,12 +14,6 @@
     "categories": {
       "auth": {
         "educon5cb0e260": {}
-      },
-      "function": {
-        "catalogcapacity": {
-          "deploymentBucketName": "amplify-educon-dev-164213-deployment",
-          "s3Key": "amplify-builds/catalogcapacity-427747547a7739375a58-build.zip"
-        }
       }
     }
   }
