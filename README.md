@@ -1,4 +1,4 @@
-# educon
+# educon projec
 
 ## Project setup
 ```
