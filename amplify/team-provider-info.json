@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "educon5cb0e260": {}
+      },
+      "function": {
+        "fcolcap": {
+          "deploymentBucketName": "amplify-educon-dev-164213-deployment",
+          "s3Key": "amplify-builds/fcolcap-4a577751496f4843784e-build.zip"
+        }
       }
     }
   }
