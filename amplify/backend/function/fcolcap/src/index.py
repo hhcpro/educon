@@ -1,21 +1,16 @@
 import json
 import boto3
+import os
 
 client = boto3.client('dynamodb')
+
+TABLE_NAME=os.environ.get('API_EDUCON_VIDEOSTABLE_NAME')
 
 def handler(event, context):
   print('received event from my new function:')
   print(event)
   
-  data = client.get_item(
-      TableName = 'API_EDUCON_VIDEOSTABLE_NAME',
-      Key={
-          'id':{
-              'S': 'opa'
-
-          }
-      }
-  )
+  data = client.scan(TableName = TABLE_NAME)
 
   return {
       'statusCode': 200,
