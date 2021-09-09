@@ -1,4 +1,4 @@
-# *educon project #5*
+# *educon project #6*
 
 ## Project setup
 ```
