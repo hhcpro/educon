@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 boto3 = "*"
+aws-wsgi = "*"
+flask = "*"
+flask-cors = "*"
 
 [dev-packages]
 
