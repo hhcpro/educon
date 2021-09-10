@@ -8,6 +8,7 @@ boto3 = "*"
 aws-wsgi = "*"
 flask = "*"
 flask-cors = "*"
+jsonify = "*"
 
 [dev-packages]
 
