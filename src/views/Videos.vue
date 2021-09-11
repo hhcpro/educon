@@ -141,7 +141,7 @@ form {
     align-items: left;
     align-self:baseline;
     margin-bottom: 20px;
-    color: green;
+    color: darkgreen;
     background-image: radial-gradient();
 }
 table {

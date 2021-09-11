@@ -1,7 +1,15 @@
+type Note @model @auth(rules: [{allow: public}]) @key(name: "byVideos", fields: ["videosID"]) {
+  id: ID!
+  message: String
+  Videos: Videos @connection
+  videosID: ID
+}
+
 type Videos @model @auth(rules: [{allow: public}]) {
   id: ID!
   filename: String
   category: String
   URL: AWSURL
+  Notes: [Note] @connection(keyName: "byVideos", fields: ["id"])
 }
  
