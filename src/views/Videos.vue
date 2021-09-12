@@ -45,10 +45,11 @@
         <form @submit.prevent="getcatalog">
             <button>Access REST</button>
             <h1>Get from REST API</h1>
+            <input class='input' v-model="in_category" placeholder="Specify Category">
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">Message from Python API</th>
+                        <th scope="col">REST: Record Count</th>
                     </tr>
                 </thead>
                     <tbody>
@@ -65,6 +66,7 @@
 import { DataStore } from '@aws-amplify/datastore';
 import { Videos } from '../models';
 import { API } from 'aws-amplify';
+//import { Auth } from 'aws-amplify';
 
 
 export default {
@@ -77,7 +79,8 @@ export default {
             filename: '',
             urllink: '',
             rest_category: '',
-            rest_url: ''
+            rest_url: '',
+            in_category: ''
         }
     },
 
@@ -124,11 +127,27 @@ export default {
         },
         async getcatalog(){
             console.log('rest get catalog called')
+            try {
+            let myHeaders = {
+                headers: {
+                    'Access-Control-Allow-Origin' : '*'
+                }
+            };
             const apiName = 'fcolcapapi';
             const path = '/colcap'; 
-            const apiData = await API.get(apiName, path);
-            console.log('Data from lambda: ', apiData)
-            this.rest_category = JSON.stringify(apiData)
+            
+                const apiData = await API.get(apiName, path, {
+                    body: { 
+                        'queryParamaters' : this.in_category
+                    }
+                });
+                console.log('Data from lambda: ', apiData, myHeaders)
+                this.rest_category = JSON.stringify(apiData)
+            }
+            catch(error) {
+                alert(error);
+            }
+            
         }
     }
 }
