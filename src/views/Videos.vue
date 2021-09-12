@@ -128,7 +128,7 @@ export default {
             const path = '/colcap'; 
             const apiData = await API.get(apiName, path);
             console.log('Data from lambda: ', apiData)
-            this.rest_category = apiData
+            this.rest_category = JSON.stringify(apiData)
         }
     }
 }

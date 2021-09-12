@@ -1,8 +1,6 @@
-type Note @model @auth(rules: [{allow: public}]) @key(name: "byVideos", fields: ["videosID"]) {
+type Notes @model @auth(rules: [{allow: public}]) {
   id: ID!
-  message: String
-  Videos: Videos @connection
-  videosID: ID
+  content: String
 }
 
 type Videos @model @auth(rules: [{allow: public}]) {
@@ -10,6 +8,5 @@ type Videos @model @auth(rules: [{allow: public}]) {
   filename: String
   category: String
   URL: AWSURL
-  Notes: [Note] @connection(keyName: "byVideos", fields: ["id"])
 }
  

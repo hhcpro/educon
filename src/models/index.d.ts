@@ -4,7 +4,7 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-type NoteMetaData = {
+type NotesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -12,15 +12,13 @@ type VideosMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class Note {
+export declare class Notes {
   readonly id: string;
-  readonly message?: string;
-  readonly Videos?: Videos;
-  readonly videosID?: string;
+  readonly content?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<Note, NoteMetaData>);
-  static copyOf(source: Note, mutator: (draft: MutableModel<Note, NoteMetaData>) => MutableModel<Note, NoteMetaData> | void): Note;
+  constructor(init: ModelInit<Notes, NotesMetaData>);
+  static copyOf(source: Notes, mutator: (draft: MutableModel<Notes, NotesMetaData>) => MutableModel<Notes, NotesMetaData> | void): Notes;
 }
 
 export declare class Videos {
@@ -28,7 +26,6 @@ export declare class Videos {
   readonly filename?: string;
   readonly category?: string;
   readonly URL?: string;
-  readonly Notes?: (Note | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Videos, VideosMetaData>);
