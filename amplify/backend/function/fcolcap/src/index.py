@@ -8,11 +8,12 @@ TABLE_NAME=os.environ.get('API_EDUCON_VIDEOSTABLE_NAME')
 videosDb = boto3.resource('dynamodb')
 table = videosDb.Table(TABLE_NAME)
 global count
-count = int(0)
 
 def handler(event, context):
   print('received event from my new function')
   print(table.creation_date_time)
+  global count
+  count=0
   try:
     queryKey = event['queryParamaters']
   except KeyError:
@@ -27,8 +28,7 @@ def handler(event, context):
   data = response['Items']
   try:
       for item in data:
-        global count
-        count = count +1
+        count = count+1
         print ('Item(%s): %s' % (str(count),str(item)))
           
   except Exception as e:
