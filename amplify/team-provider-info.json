@@ -18,7 +18,7 @@
       "function": {
         "fcolcap": {
           "deploymentBucketName": "amplify-educon-dev-164213-deployment",
-          "s3Key": "amplify-builds/fcolcap-536c423167446c4c6c52-build.zip"
+          "s3Key": "amplify-builds/fcolcap-7a6e626c745678413830-build.zip"
         }
       }
     }

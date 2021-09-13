@@ -34,6 +34,12 @@ const routes = [
         component: () =>
             import(/* webpackChunkName: "login" */ '../views/Videos.vue'),
     },
+    {
+        path: '/Mainframe',
+        name: 'Mainframe',
+        component: () =>
+            import(/* webpackChunkName: "Mainframe" */ '../views/Mainframe.vue'),
+    },
 ];
 
 const router = new VueRouter({
