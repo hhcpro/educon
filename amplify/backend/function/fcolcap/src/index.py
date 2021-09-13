@@ -7,6 +7,8 @@ TABLE_NAME=os.environ.get('API_EDUCON_VIDEOSTABLE_NAME')
 
 videosDb = boto3.resource('dynamodb')
 table = videosDb.Table(TABLE_NAME)
+global count
+count = int(0)
 
 def handler(event, context):
   print('received event from my new function')
@@ -23,13 +25,15 @@ def handler(event, context):
       print('Got Error: %s' % e)
 
   data = response['Items']
-  count = 0
   try:
       for item in data:
-          print ('Item: %s' % str(item))
-          count=+1
+        global count
+        count = count +1
+        print ('Item(%s): %s' % (str(count),str(item)))
+          
   except Exception as e:
       print('Got item error: ' + e)
+      pass
 
 
   return {
