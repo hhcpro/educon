@@ -1,3 +1,18 @@
+type QuizOptions @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Opt1: String
+  Opt2: String
+  Opt3: String
+  Opt4: String
+  Answer: Int
+}
+
+type Quizes @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Question: String
+  QuizOptions: QuizOptions @connection
+}
+
 type Notes @model @auth(rules: [{allow: public}]) {
   id: ID!
   content: String

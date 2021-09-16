@@ -24,20 +24,39 @@
 
 
 <script>
+import { DataStore } from '@aws-amplify/datastore';
+import { Quizes }  from '../models/';
 export default {
   name: 'Quiz',
   data() {
       return {
-          checkedNames: []
+          checkedNames: [],
+          quizes: []
       }
+  },
+  created(){
+      this.quizes = this.loadQuizes()
   },
   onsubmit(){
       console.log('checked')
+  },
+  methods: {
+    async loadQuizes(){   
+        console.log('Loading Quize list.....')
+        try {
+            const quizes = await DataStore.query(Quizes);
+            this.quizes = quizes;
+            console.log(this.quizes[0])
+        }
+        catch (error) {
+            alert(error);
+        }
+    }
   }
 }
 </script>
 
-<style scoped>
+<style>
 
 /* Customize the label (the wrapper) */
 .wrapper {
@@ -51,7 +70,7 @@ export default {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-size: 16px;
+  font-size: 24px;
 }
 
 /* Hide the browser's default checkbox */
@@ -108,6 +127,12 @@ export default {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+table{
+    font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
 }
 </style>
 

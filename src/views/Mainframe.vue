@@ -40,5 +40,12 @@ iframe{
   background-color: lightcoral;
 }
 
+table{
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
 /*END RESETS*/
 </style>
