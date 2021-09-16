@@ -3,24 +3,24 @@
       
       <table>
           <tr>
-             <h2>Question: {{ quizes[0].Question }} ? </h2>
+             <h2>Question # {{ qid+1 }}: {{ quizes[qid].Question }} ? </h2>
           </tr>
           <td>
          <tr>
             <input type="radio" id="1" value="1" v-model="checkedNames">
-            <label for="Option #4">{{ quizes[0].QuizOptions.Opt1 }}</label>
+            <label for="Option #4">{{ quizes[qid].QuizOptions.Opt1 }}</label>
         </tr>
         <tr>
             <input type="radio" id="2" value="2" v-model="checkedNames">
-            <label for="Option #5">{{ quizes[0].QuizOptions.Opt2 }}</label>
+            <label for="Option #5">{{ quizes[qid].QuizOptions.Opt2 }}</label>
         </tr>
         <tr>
             <input type="radio" id="3" value="3" v-model="checkedNames">
-            <label for="Option #5">{{ quizes[0].QuizOptions.Opt3 }}</label>
+            <label for="Option #5">{{ quizes[qid].QuizOptions.Opt3 }}</label>
         </tr>
         <tr>
             <input type="radio" id="4" value="4" v-model="checkedNames">
-            <label for="Option #5">{{ quizes[0].QuizOptions.Opt4 }}</label>
+            <label for="Option #5">{{ quizes[qid].QuizOptions.Opt4 }}</label>
         </tr>
         </td>
     </table>
@@ -40,13 +40,16 @@ export default {
       return {
           checkedNames: [],
           quizes: [],
-          submitValue: ''
+          submitValue: '',
+          qid: 0
           
       }
   },
   
   created(){
+      this.qid = 0;
       this.quizes = this.loadQuizes()
+      
   },
   onsubmit(){
       console.log('checked')
@@ -57,7 +60,7 @@ export default {
         try {
             const quizes = await DataStore.query(Quizes);
             this.quizes = quizes;
-            console.log(this.quizes[0])
+            console.log(this.quizes[this.qid])
         }
         catch (error) {
             alert(error);
@@ -67,8 +70,9 @@ export default {
         
         this.submitValue = this.checkedNames
         
-        if ((this.submitValue-1) === this.quizes[0].QuizOptions.Answer) {
+        if ((this.submitValue-1) === this.quizes[this.qid].QuizOptions.Answer) {
             alert('BINGO')
+            this.qid = 1;
         }
         else {
             alert('WRONG')
