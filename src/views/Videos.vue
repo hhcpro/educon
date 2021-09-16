@@ -134,13 +134,9 @@ export default {
                 }
             };
             const apiName = 'fcolcapapi';
-            const path = '/colcap'; 
+            const path = '/colcap/math3'; 
             
-                const apiData = await API.get(apiName, path, {
-                    body: { 
-                        'queryParamaters' : this.in_category
-                    }
-                });
+                const apiData = await API.get(apiName, path, {});
                 console.log('Data from lambda: ', apiData, myHeaders)
                 this.rest_category = JSON.stringify(apiData)
             }
