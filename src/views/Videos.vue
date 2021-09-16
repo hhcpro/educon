@@ -11,6 +11,7 @@
                             <th scope='col'>Name (Alias)</th>
                             <th scope='col'>Creation Date</th>
                             <th scope="col">URL</th>
+                            <th scope="col"></th>
                         </tr>
 
                     </thead>
@@ -21,9 +22,15 @@
                             <td>{{ column.filename }}</td>
                             <td>{{ column.createdAt }}</td>
                             <td>{{ column.URL }}</td>
+                            <td>
+                                <input type="checkbox" id=index value=index v-model="playchoice"/>
+                                <label for=index>{{ index }}</label>
+                            </td>
+                            
                         </tr>
                     </tbody>
                 </table>
+                <button>{{ playchoice }}</button>
         </form>
         <form @submit.prevent="updateList">
             <button>Add New record</button>
@@ -38,6 +45,7 @@
                 <td><input class='input' v-model="category" placeholder="Add Catrgory"></td>
                 <td><input class="input" v-model="filename" placeholder="Add filename"></td>
                 <td><input class="input" v-model="urllink" placeholder="Add URL"></td>
+                
             </table>
             <p>TEST INPUT: Categoty [{{ category }}], and URL: [{{ urllink }}]
             </p>
@@ -80,7 +88,8 @@ export default {
             urllink: '',
             rest_category: '',
             rest_url: '',
-            in_category: ''
+            in_category: '',
+            playchoice: []
         }
     },
 
