@@ -11,10 +11,12 @@ global count
 
 def handler(event, context):
   print('received event from my new function')
+  print('EVENT ' + str(event))
   print(table.creation_date_time)
   global count
   count=0
   try:
+    print('Event path=' + str(event['path']))
     queryKey = event['queryParamaters']
   except KeyError:
     queryKey = 'math1'
@@ -28,6 +30,14 @@ def handler(event, context):
   data = response['Items']
   try:
       for item in data:
+        try:
+          if item['_deleted'] and item['_deleted'] is True:
+            print('Skip delete record')
+            continue
+          else:
+            print('No delete field detected')
+        except KeyError:
+          pass
         count = count+1
         print ('Item(%s): %s' % (str(count),str(item)))
           

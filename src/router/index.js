@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
+import Embed from 'v-video-embed';
 
+Vue.use(Embed);
 Vue.use(VueRouter);
 
 const routes = [
