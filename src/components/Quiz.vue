@@ -24,15 +24,34 @@
 
 
 <script>
+import { DataStore } from '@aws-amplify/datastore';
+import { Quizes }  from '../models/';
 export default {
   name: 'Quiz',
   data() {
       return {
-          checkedNames: []
+          checkedNames: [],
+          quizes: []
       }
+  },
+  created(){
+      this.quizes = this.loadQuizes()
   },
   onsubmit(){
       console.log('checked')
+  },
+  methods: {
+    async loadQuizes(){   
+        console.log('Loading Quize list.....')
+        try {
+            const quizes = await DataStore.query(Quizes);
+            this.quizes = quizes;
+            console.log(this.quizes[0])
+        }
+        catch (error) {
+            alert(error);
+        }
+    }
   }
 }
 </script>
