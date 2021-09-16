@@ -3,22 +3,29 @@
       
       <table>
           <tr>
-          <h2>Question: How many fingers am I holding up? </h2>
+             <h2>Question: {{ quizes[0].Question }} ? </h2>
           </tr>
+          <td>
          <tr>
-            <input type="radio" id="Four" value="Heresy" v-model="checkedNames">
-            <label for="Option #4">Four</label>
-        </tr>
-         <tr>
-            <input type="radio" id="Five" value="Good boy" v-model="checkedNames">
-            <label for="Option #5">Five</label>
+            <input type="radio" id="1" value="1" v-model="checkedNames">
+            <label for="Option #4">{{ quizes[0].QuizOptions.Opt1 }}</label>
         </tr>
         <tr>
-            <br>
-            <span>{{ checkedNames }}</span>
+            <input type="radio" id="2" value="2" v-model="checkedNames">
+            <label for="Option #5">{{ quizes[0].QuizOptions.Opt2 }}</label>
         </tr>
-        
+        <tr>
+            <input type="radio" id="3" value="3" v-model="checkedNames">
+            <label for="Option #5">{{ quizes[0].QuizOptions.Opt3 }}</label>
+        </tr>
+        <tr>
+            <input type="radio" id="4" value="4" v-model="checkedNames">
+            <label for="Option #5">{{ quizes[0].QuizOptions.Opt4 }}</label>
+        </tr>
+        </td>
     </table>
+    <button @click='verify'>Check</button><br>
+    
   </form>
 </template>
 
@@ -28,12 +35,16 @@ import { DataStore } from '@aws-amplify/datastore';
 import { Quizes }  from '../models/';
 export default {
   name: 'Quiz',
+  
   data() {
       return {
           checkedNames: [],
-          quizes: []
+          quizes: [],
+          submitValue: ''
+          
       }
   },
+  
   created(){
       this.quizes = this.loadQuizes()
   },
@@ -51,6 +62,18 @@ export default {
         catch (error) {
             alert(error);
         }
+    },
+    verify: function(){
+        
+        this.submitValue = this.checkedNames
+        
+        if ((this.submitValue-1) === this.quizes[0].QuizOptions.Answer) {
+            alert('BINGO')
+        }
+        else {
+            alert('WRONG')
+        }
+
     }
   }
 }
@@ -133,6 +156,17 @@ table{
   font-size: 100%;
   line-height: 1.15;
   margin: 0;
+}
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 </style>
 
