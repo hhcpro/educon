@@ -22,7 +22,6 @@
             <input type="radio" id="4" value="4" v-model="checkedNames">
             <label for="Option #5">{{ quizes[0].QuizOptions.Opt4 }}</label>
         </tr>
-        
         </td>
     </table>
     <button @click='verify'>Check</button><br>
@@ -65,8 +64,7 @@ export default {
         }
     },
     verify: function(){
-        console.log('VERIFY')
-        console.log(this.checkedNames)
+        
         this.submitValue = this.checkedNames
         
         if ((this.submitValue-1) === this.quizes[0].QuizOptions.Answer) {
