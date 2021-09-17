@@ -1,6 +1,6 @@
 <template>
   <div class="mainframe">
-    <Mainscreen/>
+    <Mainscreen :URL="frame.concat('?autoplay=1')"/>
     <Quiz id='q'/>
     <p/>
     <!--Notepad id='n' msg="Class Notes" :style="{
@@ -18,10 +18,17 @@ import Mainscreen from '@/components/Mainscreen.vue'
 
 export default {
   name: 'Mainframe',
+  props: {
+    frame: String
+  },
   components: {
     Mainscreen,
-    //Notepad,
     Quiz
+  },
+  
+  created(){
+    console.log("Calling created in mainframe")
+    console.log(this.frame)
   }
 }
 </script>

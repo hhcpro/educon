@@ -10,7 +10,7 @@
                             <th scope="col">Category</th>
                             <th scope='col'>Name (Alias)</th>
                             <th scope='col'>Creation Date</th>
-                            <th scope="col">URL</th>
+                            <!--th scope="col">URL</th-->
                             <th scope="col"></th>
                         </tr>
 
@@ -21,16 +21,15 @@
                             <td>{{ column.category }}</td>
                             <td>{{ column.filename }}</td>
                             <td>{{ column.createdAt }}</td>
-                            <td>{{ column.URL }}</td>
+                            <!--td>{{ column.URL }}</td-->
                             <td>
-                                <input type="checkbox" id=index value=index v-model="playchoice"/>
-                                <label for=index>{{ index }}</label>
-                            </td>
-                            
+                                <input type="radio" id=index :value=index v-model="playchoice"/>
+                                <label for=index></label>
+                            </td>      
                         </tr>
                     </tbody>
                 </table>
-                <button>{{ playchoice }}</button>
+                <button>Submit</button>
         </form>
         <form @submit.prevent="updateList">
             <button>Add New record</button>
@@ -74,7 +73,7 @@
 import { DataStore } from '@aws-amplify/datastore';
 import { Videos } from '../models';
 import { API } from 'aws-amplify';
-//import { Auth } from 'aws-amplify';
+//import { router } from '../router/index'
 
 
 export default {
@@ -100,6 +99,14 @@ export default {
     methods: {
         async videos() {
             console.log('Calling videos');
+            //let newFrame = this.myVideos[this.playchoice].URL;
+            if(this.playchoice.length != 0){
+               this.$router.push({ name: 'Mainframe', params: { frame: this.myVideos[this.playchoice].URL }});
+            }
+            else {
+                console.log('emplty>?')
+            }
+            
             try {
                 const myVideos = await DataStore.query(Videos);
                 console.log(myVideos);

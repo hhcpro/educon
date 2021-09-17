@@ -5,7 +5,8 @@
         'margin' :'0 auto'  
         }">
     <video-embed 
-        src="https://www.youtube.com/watch?v=E4Yk0WIvHYM" 
+        :src="URL"
+        autoplay=1
         :style="{
             
             
@@ -28,8 +29,13 @@ export default {
   props:{
       css: {
                 type: String,
-                default: 'embed-responsive-16by9', 
+                default: 'embed-responsive-19by6', 
             },
+      URL: String
+  },
+  created() {
+      console.log('Calling created in SCreen')
+      console.log(this.URL)
   }
 }
 </script>

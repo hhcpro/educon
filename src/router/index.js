@@ -39,6 +39,7 @@ const routes = [
     {
         path: '/Mainframe',
         name: 'Mainframe',
+        props: true,
         component: () =>
             import(/* webpackChunkName: "Mainframe" */ '../views/Mainframe.vue'),
     },
