@@ -51,7 +51,8 @@ export default {
       this.quizes = this.loadQuizes()
       
   },
-  onsubmit(){
+  
+  onSubmit(){
       console.log('checked')
   },
   methods: {
@@ -69,10 +70,22 @@ export default {
     verify: function(){
         
         this.submitValue = this.checkedNames
+
+        if(this.submitValue === ''){
+            alert('No selaction made. Please, choose one option')
+            return;
+        }
         
         if ((this.submitValue-1) === this.quizes[this.qid].QuizOptions.Answer) {
             alert('BINGO')
-            this.qid = 1;
+            this.qid+=1;
+            this.submitValue = '';
+            this.checkedNames = [];
+            // post quiz results here to restapi /quiz/result
+            // body: {
+            //       'question': 'id, 
+            //}
+            alert(length(this.quizes))
         }
         else {
             alert('WRONG')
@@ -80,6 +93,7 @@ export default {
 
     }
   }
+  
 }
 </script>
 
