@@ -24,6 +24,7 @@
 
 
 <script>
+
 export default {
   name: 'Mainscreen',
   props:{
@@ -31,7 +32,8 @@ export default {
                 type: String,
                 default: 'embed-responsive-19by6', 
             },
-      URL: String
+    URL: String
+      
   },
   created() {
       console.log('Calling created in SCreen')

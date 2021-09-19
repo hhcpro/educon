@@ -117,6 +117,20 @@ export const schema = {
                         "targetName": "quizesQuizOptionsId"
                     }
                 },
+                "complexity": {
+                    "name": "complexity",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "videosID": {
+                    "name": "videosID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -140,6 +154,15 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byVideos",
+                        "fields": [
+                            "videosID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -249,6 +272,20 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "Quizes": {
+                    "name": "Quizes",
+                    "isArray": true,
+                    "type": {
+                        "model": "Quizes"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "videosID"
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -294,5 +331,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "72d425e45a1c2b8ef2cfbe32502d9ee8"
+    "version": "b4f071b25d6ab99be45e46880510e37e"
 };

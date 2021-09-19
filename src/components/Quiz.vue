@@ -3,24 +3,24 @@
       
       <table>
           <tr>
-             <h2>Question # {{ qid+1 }}: {{ quizes[qid].Question }} ? </h2>
+             <h2>Question # {{ qid+1 }}: {{ thequiz[qid].Question }} ? </h2>
           </tr>
           <td>
          <tr>
             <input type="radio" id="1" value="1" v-model="checkedNames">
-            <label for="Option #4">{{ quizes[qid].QuizOptions.Opt1 }}</label>
+            <label for="Option #4">{{ thequiz[qid].QuizOptions.Opt1 }}</label>
         </tr>
         <tr>
             <input type="radio" id="2" value="2" v-model="checkedNames">
-            <label for="Option #5">{{ quizes[qid].QuizOptions.Opt2 }}</label>
+            <label for="Option #5">{{ thequiz[qid].QuizOptions.Opt2 }}</label>
         </tr>
         <tr>
             <input type="radio" id="3" value="3" v-model="checkedNames">
-            <label for="Option #5">{{ quizes[qid].QuizOptions.Opt3 }}</label>
+            <label for="Option #5">{{ thequiz[qid].QuizOptions.Opt3 }}</label>
         </tr>
         <tr>
             <input type="radio" id="4" value="4" v-model="checkedNames">
-            <label for="Option #5">{{ quizes[qid].QuizOptions.Opt4 }}</label>
+            <label for="Option #5">{{ thequiz[qid].QuizOptions.Opt4 }}</label>
         </tr>
         </td>
     </table>
@@ -31,33 +31,40 @@
 
 
 <script>
-import { DataStore } from '@aws-amplify/datastore';
-import { Quizes }  from '../models/';
+//import { Quizes } from '../models'
+//import { DataStore } from '@aws-amplify/datastore';
+
 export default {
   name: 'Quiz',
+  props: {
+      thequiz: []
+  },
   
   data() {
+      console.log('Im inside Quiz compoment now.....')
+      console.log(this.thequiz[0].QuizOptions)
       return {
           checkedNames: [],
-          quizes: [],
           submitValue: '',
-          qid: 0
-          
+          qid: 0,
+          aq: this.thequiz
       }
   },
   
   created(){
       this.qid = 0;
-      this.quizes = this.loadQuizes()
-      
+      //console.log(this.thequiz)
   },
   
   onSubmit(){
       console.log('checked')
   },
+  
   methods: {
+    /*
     async loadQuizes(){   
         console.log('Loading Quize list.....')
+        /*
         try {
             const quizes = await DataStore.query(Quizes);
             this.quizes = quizes;
@@ -66,7 +73,9 @@ export default {
         catch (error) {
             alert(error);
         }
-    },
+        */
+     //  return { thequiz };
+    //}
     verify: function(){
         
         this.submitValue = this.checkedNames
@@ -76,7 +85,7 @@ export default {
             return;
         }
         
-        if ((this.submitValue-1) === this.quizes[this.qid].QuizOptions.Answer) {
+        if ((this.submitValue-1) ===   this.aq[this.qid].QuizOptions.Answer) {
             alert('BINGO')
             this.qid+=1;
             this.submitValue = '';
@@ -85,7 +94,7 @@ export default {
             // body: {
             //       'question': 'id, 
             //}
-            alert(length(this.quizes))
+            alert(length(this.thequiz))
         }
         else {
             alert('WRONG')

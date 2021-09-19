@@ -37,6 +37,8 @@ export declare class Quizes {
   readonly id: string;
   readonly Question?: string;
   readonly QuizOptions?: QuizOptions;
+  readonly complexity?: string;
+  readonly videosID?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Quizes, QuizesMetaData>);
@@ -57,6 +59,7 @@ export declare class Videos {
   readonly filename?: string;
   readonly category?: string;
   readonly URL?: string;
+  readonly Quizes?: (Quizes | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Videos, VideosMetaData>);

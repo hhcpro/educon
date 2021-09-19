@@ -1,7 +1,7 @@
 <template>
   <div class="mainframe">
-    <Mainscreen :URL="frame.concat('?autoplay=1')"/>
-    <Quiz id='q'/>
+    <Mainscreen :URL="frame"/>
+    <Quiz :thequiz="quiz"/>
     <p/>
     <!--Notepad id='n' msg="Class Notes" :style="{
         background: blue
@@ -13,13 +13,17 @@
 // @ is an alias to /src
 //import Notepad from '@/components/Notepad.vue';
 import Quiz from '@/components/Quiz.vue';
+//import Quizes from '../models';
+//import { Quizes } from '../models';
 import Mainscreen from '@/components/Mainscreen.vue'
+//import { Quizes } from '../models';
 
 
 export default {
   name: 'Mainframe',
   props: {
-    frame: String
+    frame: String, 
+    quiz: []
   },
   components: {
     Mainscreen,
@@ -29,6 +33,7 @@ export default {
   created(){
     console.log("Calling created in mainframe")
     console.log(this.frame)
+    console.log(this.quiz)
   }
 }
 </script>
