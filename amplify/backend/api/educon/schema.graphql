@@ -7,10 +7,12 @@ type QuizOptions @model @auth(rules: [{allow: public}]) {
   Answer: Int
 }
 
-type Quizes @model @auth(rules: [{allow: public}]) {
+type Quizes @model @auth(rules: [{allow: public}]) @key(name: "byVideos", fields: ["videosID"]) {
   id: ID!
   Question: String
   QuizOptions: QuizOptions @connection
+  complexity: ID
+  videosID: ID
 }
 
 type Notes @model @auth(rules: [{allow: public}]) {
@@ -23,5 +25,6 @@ type Videos @model @auth(rules: [{allow: public}]) {
   filename: String
   category: String
   URL: AWSURL
+  Quizes: [Quizes] @connection(keyName: "byVideos", fields: ["id"])
 }
  

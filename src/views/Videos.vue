@@ -71,7 +71,8 @@
 <script>
 
 import { DataStore } from '@aws-amplify/datastore';
-import { Videos } from '../models';
+import { Quizes, Videos } from '../models';
+//import { Quizes } from '../models';
 import { API } from 'aws-amplify';
 //import { router } from '../router/index'
 
@@ -82,6 +83,7 @@ export default {
         console.log("Calling data");
         return {
             myVideos: [],
+            theQuiz: [],
             category: '',
             filename: '',
             urllink: '',
@@ -99,12 +101,37 @@ export default {
     methods: {
         async videos() {
             console.log('Calling videos');
-            //let newFrame = this.myVideos[this.playchoice].URL;
+            
+            // when enter method for the first time choise should be empty
+            // so just skip quiz query and continue
+            // for the second time we already know the choice 
+            // we query for quiz content and switch to mainview 
             if(this.playchoice.length != 0){
-               this.$router.push({ name: 'Mainframe', params: { frame: this.myVideos[this.playchoice].URL }});
+               console.log('second time entry')
+               
+               
+               const qres = (await DataStore.query(Quizes))
+                    .filter( q => q.videosID === this.myVideos[this.playchoice].id)
+               
+
+               console.log('Dump response:')   
+               console.log(qres);
+               this.theQuiz = qres
+               console.log(this.theQuiz);
+               console.log('************************')
+               console.log(this.myVideos[this.playchoice].id);
+               console.log(this.theQuiz); 
+               console.log('************************')
+               this.$router.push({ name: 'Mainframe', 
+               params: { 
+                   frame: this.myVideos[this.playchoice].URL,
+                   quiz: this.theQuiz
+                   }
+                });
+                return;
             }
             else {
-                console.log('emplty>?')
+                console.log('First round, no choice made yet')
             }
             
             try {
