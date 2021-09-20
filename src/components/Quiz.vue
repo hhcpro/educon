@@ -31,10 +31,11 @@
 
 
 <script>
-//import { Quizes } from '../models'
-//import { DataStore } from '@aws-amplify/datastore';
+
+import { API } from 'aws-amplify';
 
 export default {
+  
   name: 'Quiz',
   props: {
       thequiz: []
@@ -47,13 +48,12 @@ export default {
           checkedNames: [],
           submitValue: '',
           qid: 0,
-          aq: this.thequiz
+          nattempts: 0
       }
   },
   
   created(){
       this.qid = 0;
-      //console.log(this.thequiz)
   },
   
   onSubmit(){
@@ -61,22 +61,9 @@ export default {
   },
   
   methods: {
-    /*
-    async loadQuizes(){   
-        console.log('Loading Quize list.....')
-        /*
-        try {
-            const quizes = await DataStore.query(Quizes);
-            this.quizes = quizes;
-            console.log(this.quizes[this.qid])
-        }
-        catch (error) {
-            alert(error);
-        }
-        */
-     //  return { thequiz };
-    //}
+    
     verify: function(){
+        console.log('in verify call........')
         
         this.submitValue = this.checkedNames
 
@@ -85,21 +72,50 @@ export default {
             return;
         }
         
-        if ((this.submitValue-1) ===   this.aq[this.qid].QuizOptions.Answer) {
+        if ((this.submitValue-1) ===   this.thequiz[this.qid].QuizOptions.Answer) {
             alert('BINGO')
             this.qid+=1;
             this.submitValue = '';
             this.checkedNames = [];
-            // post quiz results here to restapi /quiz/result
-            // body: {
-            //       'question': 'id, 
-            //}
-            alert(length(this.thequiz))
+            console.log('before calling notify')
+            this.notifyApi()
         }
         else {
             alert('WRONG')
+            this.nattempts+=1
+            if(this.nattempts >= 10) {
+              // stop playing send report and move to another q if exists
+              this.notifyApi()
+            }
         }
+    },
+    async notifyApi() {
+      console.log('Notify backend....')
 
+      try {
+        /*
+        let myHeaders = {
+           headers: {
+            'Access-Control-Allow-Origin' : '*'
+           }
+        };
+        */
+        const apiName = 'qreport';
+        const path = '/user/quiz/report'; 
+            
+        await API.post(apiName, path, {
+          body: {
+            userID: 123,
+            QuizID: this.thequiz[this.qid].QuizID,
+            attemps: 10
+          }
+        });
+        //console.log('Data from lambda: ', apiData, myHeaders)
+        
+      }
+      catch(error) {
+        alert(error);
+      }
     }
   }
   

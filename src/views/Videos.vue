@@ -72,9 +72,7 @@
 
 import { DataStore } from '@aws-amplify/datastore';
 import { Quizes, Videos } from '../models';
-//import { Quizes } from '../models';
 import { API } from 'aws-amplify';
-//import { router } from '../router/index'
 
 
 export default {
