@@ -1,0 +1,1 @@
+{ "httpMethod": "POST", "path": "/user/quiz/report", "body" : { "userID": 123, "attempts": 10 } }
