@@ -1,4 +1,4 @@
-import json
+import json, requests, pprint
 
 def handler(event, context):
   print('received event:')
@@ -6,6 +6,10 @@ def handler(event, context):
 
   try:
     print(event['body'])
+
+    output = json.loads(event['body'])
+    pprint.pprint(output)
+
   except Exception as e:
     print(e)
   
