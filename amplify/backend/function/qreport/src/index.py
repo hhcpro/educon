@@ -1,4 +1,4 @@
-import json, requests, pprint
+import json, pprint
 
 def handler(event, context):
   print('received event:')
