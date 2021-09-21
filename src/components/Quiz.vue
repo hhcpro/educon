@@ -93,28 +93,22 @@ export default {
       console.log('Notify backend....')
 
       try {
-        /*
-        let myHeaders = {
-           headers: {
-            'Access-Control-Allow-Origin' : '*'
-           }
-        };
-        */
+        
         const apiName = 'qreport';
         const path = '/user/quiz/report'; 
             
         await API.post(apiName, path, {
           body: {
             userID: 123,
-            QuizID: this.thequiz[this.qid].QuizID,
+            QuizID: this.thequiz[this.qid].id,
             attemps: 10
           }
+        }).then(result=> {
+          alert(result);
         });
-        //console.log('Data from lambda: ', apiData, myHeaders)
-        
       }
       catch(error) {
-        alert(error);
+        alert(`ERROR: ${error}`);
       }
     }
   }
