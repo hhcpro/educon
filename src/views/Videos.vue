@@ -1,5 +1,8 @@
 <template>
     <div class="container">
+        <div >
+            <h1 v-bind="userid">Active User: {{ username }}</h1>
+        </div>
         <form @submit.prevent="videos">
             <button>Get List of Classes</button>
             <h1>Catalog</h1>
@@ -49,21 +52,6 @@
             <p>TEST INPUT: Categoty [{{ category }}], and URL: [{{ urllink }}]
             </p>
         </form>
-        <form @submit.prevent="getcatalog">
-            <button>Access REST</button>
-            <h1>Get from REST API</h1>
-            <input class='input' v-model="in_category" placeholder="Specify Category">
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">REST: Record Count</th>
-                    </tr>
-                </thead>
-                    <tbody>
-                        <p>{{ rest_category }}</p>
-                    </tbody>
-            </table>
-        </form>
     </div>
 </template>
 
@@ -72,11 +60,14 @@
 
 import { DataStore } from '@aws-amplify/datastore';
 import { Quizes, Videos } from '../models';
-import { API } from 'aws-amplify';
+
 
 
 export default {
     name: 'Videos',
+    props: {
+        username: String
+    },
     data() {
         console.log("Calling data");
         return {
@@ -88,7 +79,8 @@ export default {
             rest_category: '',
             rest_url: '',
             in_category: '',
-            playchoice: []
+            playchoice: [],
+            userDetails: []
         }
     },
 
@@ -100,30 +92,20 @@ export default {
         async videos() {
             console.log('Calling videos');
             
-            // when enter method for the first time choise should be empty
-            // so just skip quiz query and continue
-            // for the second time we already know the choice 
-            // we query for quiz content and switch to mainview 
             if(this.playchoice.length != 0){
                console.log('second time entry')
                
                
                const qres = (await DataStore.query(Quizes))
                     .filter( q => q.videosID === this.myVideos[this.playchoice].id)
-               
-
-               console.log('Dump response:')   
+            
                console.log(qres);
                this.theQuiz = qres
-               console.log(this.theQuiz);
-               console.log('************************')
-               console.log(this.myVideos[this.playchoice].id);
-               console.log(this.theQuiz); 
-               console.log('************************')
                this.$router.push({ name: 'Mainframe', 
                params: { 
                    frame: this.myVideos[this.playchoice].URL,
-                   quiz: this.theQuiz
+                   quiz: this.theQuiz,
+                   username: this.username
                    }
                 });
                 return;
@@ -166,26 +148,7 @@ export default {
             }
             
         },
-        async getcatalog(){
-            console.log('rest get catalog called')
-            try {
-            let myHeaders = {
-                headers: {
-                    'Access-Control-Allow-Origin' : '*'
-                }
-            };
-            const apiName = 'fcolcapapi';
-            const path = '/colcap/math3'; 
-            
-                const apiData = await API.get(apiName, path, {});
-                console.log('Data from lambda: ', apiData, myHeaders)
-                this.rest_category = JSON.stringify(apiData)
-            }
-            catch(error) {
-                alert(error);
-            }
-            
-        }
+        
     }
 }
 </script>

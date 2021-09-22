@@ -3,7 +3,7 @@
         <form @submit.prevent="login">
             <h2>Login</h2>
             <input
-                type="email"
+                type="text"
                 v-model="email"
                 placeholder="Email address..."
             />
@@ -30,9 +30,15 @@ export default {
     methods: {
         async login() {
             try {
+                console.log('the user', this.email);
                 const user = await Auth.signIn(this.email, this.password);
                 console.log('the user', user);
                 alert('Successfully logged in'); 
+                this.$router.push({ name: 'Videos', 
+                params: { 
+                   username: this.email
+                   }
+                });
             } catch (error) {
                 alert(error.message);
             }
