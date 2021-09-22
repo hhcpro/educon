@@ -38,7 +38,8 @@ export default {
   
   name: 'Quiz',
   props: {
-      thequiz: []
+      thequiz: [],
+      username: String
   },
   
   data() {
@@ -99,7 +100,7 @@ export default {
             
         await API.post(apiName, path, {
           body: {
-            userID: 123,
+            userID: this.username,
             QuizID: this.thequiz[this.qid].id,
             attemps: 10
           }

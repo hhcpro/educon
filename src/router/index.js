@@ -33,6 +33,7 @@ const routes = [
     {
         path: '/videos',
         name: 'Videos',
+        props: true,
         component: () =>
             import(/* webpackChunkName: "login" */ '../views/Videos.vue'),
     },

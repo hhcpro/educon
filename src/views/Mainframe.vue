@@ -23,7 +23,8 @@ export default {
   name: 'Mainframe',
   props: {
     frame: String, 
-    quiz: []
+    quiz: [],
+    username: String
   },
   components: {
     Mainscreen,

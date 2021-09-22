@@ -4,9 +4,10 @@ import { schema } from './schema';
 
 
 
-const { QuizOptions, Quizes, Notes, Videos } = initSchema(schema);
+const { UserProfile, QuizOptions, Quizes, Notes, Videos } = initSchema(schema);
 
 export {
+  UserProfile,
   QuizOptions,
   Quizes,
   Notes,
