@@ -1,7 +1,8 @@
 <template>
   <div class="mainframe">
+    <h1>User: {{ username }} </h1>
     <Mainscreen :URL="frame"/>
-    <Quiz :thequiz="quiz"/>
+    <Quiz :thequiz="quiz" :username="username"/>
     <p/>
     <!--Notepad id='n' msg="Class Notes" :style="{
         background: blue

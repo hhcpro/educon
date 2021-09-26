@@ -13,6 +13,7 @@
     "react-native-webview": "^11.13.0",
     "v-video-embed": "^1.0.8",
     "vue": "^2.6.11",
+    "vue-googleapis": "^1.0.10",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {

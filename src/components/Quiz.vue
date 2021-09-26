@@ -52,11 +52,9 @@ export default {
           nattempts: 0
       }
   },
-  
   created(){
       this.qid = 0;
   },
-  
   onSubmit(){
       console.log('checked')
   },
@@ -75,16 +73,16 @@ export default {
         
         if ((this.submitValue-1) ===   this.thequiz[this.qid].QuizOptions.Answer) {
             alert('BINGO')
+            this.nattempts+=1
             this.qid+=1;
             this.submitValue = '';
             this.checkedNames = [];
-            console.log('before calling notify')
             this.notifyApi()
         }
         else {
             alert('WRONG')
             this.nattempts+=1
-            if(this.nattempts >= 10) {
+            if(this.nattempts >= 5) {
               // stop playing send report and move to another q if exists
               this.notifyApi()
             }
@@ -97,16 +95,16 @@ export default {
         
         const apiName = 'qreport';
         const path = '/user/quiz/report'; 
-            
         await API.post(apiName, path, {
           body: {
             userID: this.username,
-            QuizID: this.thequiz[this.qid].id,
-            attemps: 10
+            QuizID: this.thequiz[this.qid-1].id,
+            attemps: this.nattempts
           }
         }).then(result=> {
           alert(result);
         });
+        this.nattempts = 0;
       }
       catch(error) {
         alert(`ERROR: ${error}`);
