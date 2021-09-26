@@ -25,6 +25,8 @@
 
 <script>
 
+//import { Gapi } from '/vue-googleapis';
+
 export default {
   name: 'Mainscreen',
   props:{
@@ -34,10 +36,16 @@ export default {
             },
     URL: String
       
-  },
+  }
+  /*,
+  data() {
+      apiKey: 'AIzaSyBz0jeyQSoJKXGvpudQ4R4HpTu9-V1AVBM';
+      clientId: '';
+  }*/,
   created() {
       console.log('Calling created in SCreen')
       console.log(this.URL)
+      //this.clientId = Gapi.clientId()
   }
 }
 </script>
