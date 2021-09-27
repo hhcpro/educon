@@ -27,6 +27,13 @@ def handler(event, context):
     
   except Exception as e:
     print(e)
+
+  try:
+    print("Arg: " + str(output['UserID']))
+    response = user_table.scan(FilterExpression=Attr('user_name').eq(str(output['userID'])))
+    pprint(response)
+  except Exception as e:
+    print('DB Error: ' + str(e))
   
   return {
       'statusCode': 200,
