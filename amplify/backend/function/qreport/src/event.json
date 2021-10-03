@@ -1,1 +1,1 @@
-{ "httpMethod": "POST", "path": "/user/quiz/report", "body" : { "userID": "user1", "attempts": 10 } }
+{ "httpMethod": "POST", "path": "/user/quiz/report", "body" : { "userID": "user1", "attempts": "10" } }

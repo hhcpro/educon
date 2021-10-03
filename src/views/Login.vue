@@ -31,7 +31,26 @@ export default {
         async login() {
             try {
                 console.log('the user', this.email);
-                const user = await Auth.signIn(this.email, this.password);
+                const user = await Auth.signIn(this.email, this.password).then(user => {
+                    alert(user)
+                    if(user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+                        //const { requiredAttributes } = user.challengeParam;
+                        Auth.completeNewPassword(
+                            user,
+                            this.password,
+                            {
+                                email: this.email,
+                                phone_number: '906430'
+                            }
+                        ).then(user => {
+                            console.log(user);
+                        }).catch(e => {
+                            console.log(e);
+                        });
+                    } else {
+                        console.log('Other situations')
+                    }
+                });
                 console.log('the user', user);
                 alert('Successfully logged in'); 
                 this.$router.push({ name: 'Videos', 
@@ -41,6 +60,7 @@ export default {
                 });
             } catch (error) {
                 alert(error.message);
+                //await Auth.res
             }
         },
     },

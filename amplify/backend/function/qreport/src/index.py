@@ -3,35 +3,37 @@ import boto3
 from boto3.dynamodb.conditions import Attr
 import os
 
-VIDEOS_TABLE_NAME=os.environ.get('API_EDUCON_VIDEOSTABLE_NAME')
 USER_TABLE_NAME=os.environ.get('API_EDUCON_USERPROFILETABLE_NAME')
-QUIZ_TABLE_NAME=os.environ.get('API_EDUCON_QUIZESTABLE_NAME')
 
-
-DB = boto3.resource('dynamodb')
-user_table = DB.Table(USER_TABLE_NAME)
-quiz_table = DB.Table(QUIZ_TABLE_NAME)
+database = boto3.resource('dynamodb')
+t = database.Table(USER_TABLE_NAME)
 
 def handler(event, context):
   print('received event:')
   print(event)
-  print('UserProfile table created: '+ str(user_table.creation_date_time))
-  print('Quiz table created: ' + str(quiz_table.creation_date_time))
+  print('UserProfile table created: '+ str(t.creation_date_time))
+  
   global output
   output=None
   try:
-    print(event['body'])
+    print('DATA RECEIVED: ' + str(event['body']))
 
-    output = json.loads(event['body'])
+    output = json.loads(str(event['body']))
     pprint.pprint(output)
     
   except Exception as e:
     print(e)
 
   try:
-    print("Arg: " + str(output['UserID']))
-    response = user_table.scan(FilterExpression=Attr('user_name').eq(str(output['userID'])))
-    pprint(response)
+    
+    lookupkey=str(output['userID'])
+    #lookupkey = '1633236737849'
+    print("Arg: " + lookupkey)
+    response = t.scan(FilterExpression=Attr('user_name').eq(lookupkey))
+    #response = t.scan(TableName = USER_TABLE_NAME)
+    data = response['Items']
+
+    pprint.pprint(data)
   except Exception as e:
     print('DB Error: ' + str(e))
   

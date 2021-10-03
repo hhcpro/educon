@@ -3,9 +3,15 @@
         <form @submit.prevent="register">
             <h2>Register</h2>
             <input
-                type="text"
+                type="email"
                 v-model="email"
                 placeholder="Email address..."
+            />
+            <input 
+                type="text"
+                v-model="username"
+                placeholder="User Name"
+
             />
             <input
                 type="password"
@@ -26,14 +32,17 @@ export default {
         return {
             email: '',
             password: '',
+            username: ''
         };
     },
     methods: {
         async register() {
+            
             try {
                 await Auth.signUp({
-                    username: this.email,
+                    username: String(Date.now()),
                     password: this.password,
+                    attributes: { email: this.email, preferred_username: this.username }
                 });
                 alert('User successfully registered. Please login');
             } catch (error) {
