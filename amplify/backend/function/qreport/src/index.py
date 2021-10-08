@@ -27,7 +27,6 @@ def handler(event, context):
   try:
     
     lookupkey=str(output['userID'])
-    #lookupkey = '1633236737849'
     print("Arg: " + lookupkey)
     response = t.scan(FilterExpression=Attr('user_name').eq(lookupkey))
     #response = t.scan(TableName = USER_TABLE_NAME)

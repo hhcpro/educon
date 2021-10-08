@@ -86,7 +86,7 @@ export default {
 
     created(){
         this.myVideos = this.videos();
-        this.rest_category = this.getcatalog();
+        //this.rest_category = this.getcatalog();
     },
     methods: {
         async videos() {
