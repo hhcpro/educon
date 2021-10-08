@@ -4,8 +4,8 @@
             <h2>Login</h2>
             <input
                 type="text"
-                v-model="email"
-                placeholder="Email address..."
+                v-model="username"
+                placeholder="Generated Username..."
             />
             <input
                 type="password"
@@ -21,17 +21,23 @@
 import { Auth } from 'aws-amplify';
 export default {
     name: 'Login',
+    props: {
+        defName: String,
+    },
     data() {
         return {
-            email: '',
+            username: '',
             password: '',
         };
+    },
+    created(){
+      this.username = this.defName  
     },
     methods: {
         async login() {
             try {
-                console.log('the user', this.email);
-                const user = await Auth.signIn(this.email, this.password).then(user => {
+                console.log('the user', this.username);
+                const user = await Auth.signIn(this.username, this.password).then(user => {
                     alert(user)
                     if(user.challengeName === 'NEW_PASSWORD_REQUIRED') {
                         //const { requiredAttributes } = user.challengeParam;
@@ -39,7 +45,7 @@ export default {
                             user,
                             this.password,
                             {
-                                email: this.email,
+                                email: this.username,
                                 phone_number: '906430'
                             }
                         ).then(user => {
@@ -55,7 +61,7 @@ export default {
                 alert('Successfully logged in'); 
                 this.$router.push({ name: 'Videos', 
                 params: { 
-                   username: this.email
+                   username: this.username
                    }
                 });
             } catch (error) {
