@@ -1,3 +1,4 @@
+from io import StringIO
 import json, pprint
 import boto3
 from boto3.dynamodb.conditions import Attr
@@ -33,6 +34,20 @@ def handler(event, context):
     data = response['Items']
 
     pprint.pprint(data)
+
+    # update record for User 
+    rupdate = t.update_item(
+      Key={
+        'user_name' : output['userID'],
+      },
+      UpdateExpression="set top_scope=:t, last_class=:l",
+      ExpressionAttributeValues={
+        ':t' : StringIO(output['attempts']),
+        ':l' : output['QuizID']
+      },
+      ReturnValues="UPDATED_NEW"
+    )
+    print(rupdate)
   except Exception as e:
     print('DB Error: ' + str(e))
   

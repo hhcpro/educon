@@ -99,7 +99,7 @@ export default {
           body: {
             userID: this.username,
             QuizID: this.thequiz[this.qid-1].id,
-            attemps: this.nattempts
+            attempts: this.nattempts
           }
         }).then(result=> {
           alert(result);

@@ -22,7 +22,7 @@
         },
         "qreport": {
           "deploymentBucketName": "amplify-educon-dev-164213-deployment",
-          "s3Key": "amplify-builds/qreport-4c5956664b2f3974386a-build.zip"
+          "s3Key": "amplify-builds/qreport-6a4752626d3673704158-build.zip"
         }
       }
     }
