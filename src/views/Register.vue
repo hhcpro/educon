@@ -66,7 +66,7 @@ export default {
                 
                 alert('User successfully registered. Please login');
                 
-                
+                console.log('Save results for user: ' + this.username)
                 await DataStore.save(
                     new UserProfile({
                         user_name: this.username,
