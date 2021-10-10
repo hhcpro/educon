@@ -35,19 +35,18 @@ def handler(event, context):
 
     pprint.pprint(data)
 
-    # update record for User 
     rupdate = t.update_item(
       Key={
-        'user_name' : output['userID'],
+        'id' : data[0]['id'],
       },
-      UpdateExpression="set top_scope=:t, last_class=:l",
+      UpdateExpression="set top_score=:t, last_class=:l",
       ExpressionAttributeValues={
-        ':t' : StringIO(output['attempts']),
+        ':t' : output['attempts'],
         ':l' : output['QuizID']
       },
       ReturnValues="UPDATED_NEW"
     )
-    print(rupdate)
+    #print(rupdate)
   except Exception as e:
     print('DB Error: ' + str(e))
   
