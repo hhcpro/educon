@@ -3,6 +3,7 @@
     <h1>User: {{ username }} </h1>
     <Mainscreen :URL="frame"/>
     <Quiz :thequiz="quiz" :username="username"/>
+    <Scorecard :latest_score="1.1"/>
     <p/>
     <!--Notepad id='n' msg="Class Notes" :style="{
         background: blue
@@ -12,12 +13,10 @@
 
 <script>
 // @ is an alias to /src
-//import Notepad from '@/components/Notepad.vue';
+
 import Quiz from '@/components/Quiz.vue';
-//import Quizes from '../models';
-//import { Quizes } from '../models';
-import Mainscreen from '@/components/Mainscreen.vue'
-//import { Quizes } from '../models';
+import Mainscreen from '@/components/Mainscreen.vue';
+import Scorecard from '@/components/Scorecard.vue';
 
 
 export default {
@@ -29,7 +28,8 @@ export default {
   },
   components: {
     Mainscreen,
-    Quiz
+    Quiz,
+    Scorecard
   },
   
   created(){
