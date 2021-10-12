@@ -75,13 +75,6 @@ def handler(event, context):
   except Exception as e:
     print('DB Error: ' + str(e))
 
-  out = {}
-  out['score']=str(score)
-  out['userID']=str(output['userID'])
-  json_out = json.dumps(out)
-  print('OUT-------')
-  pprint.pprint(json_out)
-  print('---------')
   
   return {
       'statusCode': 200,
@@ -90,5 +83,5 @@ def handler(event, context):
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
       },
-      'body': json.dumps(str(out))
+      'body': str(score)
   }

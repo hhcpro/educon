@@ -1,1 +1,7 @@
-{ "httpMethod": "POST", "path": "/user/quiz/report", "body" : { "userID": "1633838197169", "attempts": "2" } }
+{ "httpMethod": "POST", "path": "/user/quiz/report", "body" : 
+    { 
+        "userID": "1634002404628",
+        "QuizID": "c035f288-b423-496c-9b6a-c567ce731d91", 
+        "attempts": "1" 
+    } 
+}

@@ -49,7 +49,8 @@ export default {
           checkedNames: [],
           submitValue: '',
           qid: 0,
-          nattempts: 0
+          nattempts: 0,
+          
       }
   },
   created(){
@@ -77,18 +78,18 @@ export default {
             this.qid+=1;
             this.submitValue = '';
             this.checkedNames = [];
-            this.notifyApi()
+            this.update_score()
         }
         else {
             alert('WRONG')
             this.nattempts+=1
             if(this.nattempts >= 5) {
               // stop playing send report and move to another q if exists
-              this.notifyApi()
+              this.update_score()
             }
         }
     },
-    async notifyApi() {
+    async update_score() {
       console.log('Notify backend....')
 
       try {
@@ -102,7 +103,9 @@ export default {
             attempts: String(this.nattempts)
           }
         }).then(result=> {
+          
           alert(result);
+          
         });
         this.nattempts = 0;
       }
