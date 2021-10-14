@@ -1,10 +1,11 @@
 <template>
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="getScore">
         <table>
             <tr><h1>Score Card</h1></tr>
             <td>
                 <tr>
-                    <h2>Latest Score: {{ latest_score }}</h2>
+                    <h2>Latest Score for User: {{ userid }}</h2>
+                    <h3 v-bind:class="score">{{ score }} </h3>
                 </tr>
             </td>
         </table>
@@ -13,12 +14,40 @@
 
 
 <script>
+import { DataStore } from '@aws-amplify/datastore';
+import { UserProfile } from '../models';
 
 export default {
     name: 'Scorecard',
     props: {
-        latest_score: String
+        userid: String
+    },
+    data() {
+        return {
+            score: '',
+            profile: []
+        }
+    },
+    created() {
+        this.getScore()
+    },
+    methods: {
+        async getScore() {
+            try{
+                console.log('getting user profile data: user=' + this.userid)
+                const qres = (await DataStore.query(UserProfile))
+                    .filter( q => q.user_name === this.userid)
+                console.log(qres)
+                this.profile = qres                
+                this.score = this.profile[0].top_score
+                
+            } 
+            catch(error) {
+                alert(error);
+            }
+        }
     }
+    
 }
 </script>
 

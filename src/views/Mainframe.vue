@@ -3,7 +3,7 @@
     <h1>User: {{ username }} </h1>
     <Mainscreen :URL="frame"/>
     <Quiz :thequiz="quiz" :username="username"/>
-    <Scorecard :latest_score="1.1"/>
+    <Scorecard :userid="username"/>
     <p/>
     <!--Notepad id='n' msg="Class Notes" :style="{
         background: blue
