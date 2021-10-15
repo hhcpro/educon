@@ -16,6 +16,9 @@
 <script>
 import { DataStore } from '@aws-amplify/datastore';
 import { UserProfile } from '../models';
+import { API, graphqlOperation } from 'aws-amplify';
+import { onUpdateUserProfile } from '../graphql/subscriptions';
+
 
 export default {
     name: 'Scorecard',
@@ -25,11 +28,31 @@ export default {
     data() {
         return {
             score: '',
-            profile: []
+            profile: [],
+            subscription: null
+            
         }
     },
     created() {
+        
+        //this.sub()
+        console.log('Subscribing for up changes')
+        this.subscription = API.graphql(
+          graphqlOperation(onUpdateUserProfile),
+        ).subscribe({
+          next: ({ provider, value }) => {
+            console.log({provider, value})
+            console.log(value.data.onUpdateUserProfile)
+          },
+        });
         this.getScore()
+    },
+    beforeDestroy() {
+      console.log('unsubscribe up changes')
+      if(this.subscription) {
+        this.subscription.unsubscribe();
+        this.subscription = null
+      }
     },
     methods: {
         async getScore() {

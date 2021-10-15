@@ -1,4 +1,3 @@
-from io import StringIO
 import json, pprint
 import boto3
 from boto3.dynamodb.conditions import Attr
@@ -71,7 +70,7 @@ def handler(event, context):
       },
       ReturnValues="UPDATED_NEW"
     )
-    #print(rupdate)
+    print(rupdate)
   except Exception as e:
     print('DB Error: ' + str(e))
 
