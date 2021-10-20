@@ -38,7 +38,7 @@ export default {
             try {
                 console.log('the user', this.username);
                 const user = await Auth.signIn(this.username, this.password).then(user => {
-                    alert(user)
+                    //alert(user)
                     if(user.challengeName === 'NEW_PASSWORD_REQUIRED') {
                         //const { requiredAttributes } = user.challengeParam;
                         Auth.completeNewPassword(
