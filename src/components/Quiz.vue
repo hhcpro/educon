@@ -33,6 +33,7 @@
 <script>
 
 import { API } from 'aws-amplify';
+//import { Scorecard } from '../components/Scorecard.vue';
 
 export default {
   
@@ -103,9 +104,7 @@ export default {
             attempts: String(this.nattempts)
           }
         }).then(result=> {
-          
           alert(result);
-          
         });
         this.nattempts = 0;
       }

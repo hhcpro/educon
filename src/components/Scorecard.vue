@@ -34,18 +34,23 @@ export default {
         }
     },
     created() {
-        
-        //this.sub()
-        console.log('Subscribing for up changes')
-        this.subscription = API.graphql(
-          graphqlOperation(onUpdateUserProfile),
-        ).subscribe({
-          next: ({ provider, value }) => {
-            console.log({provider, value})
-            console.log(value.data.onUpdateUserProfile)
-          },
-        });
         this.getScore()
+        //this.sub()
+        try {
+          console.log('Subscribing for up changes')
+          this.subscription = API.graphql(
+            graphqlOperation(onUpdateUserProfile),
+          ).subscribe({
+            next: ({ provider, value }) => {
+              console.log({provider, value})
+              console.log(value.data.onUpdateUserProfile)
+            },
+          });
+        } catch(err) {
+          alert(err)
+        }
+        console.log(this.subscription)
+        
     },
     beforeDestroy() {
       console.log('unsubscribe up changes')
@@ -60,15 +65,15 @@ export default {
                 console.log('getting user profile data: user=' + this.userid)
                 const qres = (await DataStore.query(UserProfile))
                     .filter( q => q.user_name === this.userid)
-                console.log(qres)
-                this.profile = qres                
-                this.score = this.profile[0].top_score
-                
+                console.log(qres);
+                this.profile = qres;                
+                this.score = this.profile[0].top_score;
             } 
             catch(error) {
                 alert(error);
             }
-        }
+        },
+        
     }
     
 }
