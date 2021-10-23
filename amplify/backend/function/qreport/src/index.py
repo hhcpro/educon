@@ -56,7 +56,7 @@ def handler(event, context):
     comp = float(qdata[0]['complexity'])
     natt = float(output['attempts'])
     score = (comp/natt) + last_score
-    print("Calculated score %.2f=%.2f/%.2f and last_score was: %.2f" % (score, comp, natt, last_score))
+    print("Calculated score %.2f=%.2f/%.2f + %.2f" % (score, comp, natt, last_score))
     
 
     rupdate = user_table.update_item(
