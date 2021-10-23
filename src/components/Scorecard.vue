@@ -18,6 +18,9 @@ import { DataStore } from '@aws-amplify/datastore';
 import { UserProfile } from '../models';
 import { API, graphqlOperation } from 'aws-amplify';
 import { onUpdateUserProfile } from '../graphql/subscriptions';
+import { AWSAppSyncClient }  from 'aws-appsync';
+//import * as subscriptions from '../graphql/subscriptions';
+import awsconfig from '../aws-exports';
 
 
 export default {
@@ -26,16 +29,28 @@ export default {
         userid: String
     },
     data() {
+        
         return {
             score: '',
             profile: [],
-            subscription: null
+            subscription: null,
+            client: null
             
         }
     },
     created() {
+        this.client = new AWSAppSyncClient({
+            url: awsconfig.aws_appsync_graphqlEndpoint,
+            region: awsconfig.aws_appsync_region,
+            auth: {
+                type: awsconfig.aws_appsync_apiKey,
+            }
+        });
+        console.log(this.client)
+        
         this.getScore()
-        //this.sub()
+        
+        
         try {
           console.log('Subscribing for up changes')
           this.subscription = API.graphql(
