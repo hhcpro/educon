@@ -2,6 +2,7 @@
     <div class="container">
         <div >
             <h1 v-bind="userid">Active User: {{ username }}</h1>
+            <h2 v-bind="score">Last class score: {{ score }}</h2>
         </div>
         <form @submit.prevent="videos">
             <button>Get List of Classes</button>
@@ -66,7 +67,8 @@ import { Quizes, Videos } from '../models';
 export default {
     name: 'Videos',
     props: {
-        username: String
+        username: String,
+        score: String
     },
     data() {
         console.log("Calling data");

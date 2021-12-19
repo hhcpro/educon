@@ -51,6 +51,7 @@ export default {
           submitValue: '',
           qid: 0,
           nattempts: 0,
+          lastscore: ''
           
       }
   },
@@ -81,18 +82,7 @@ export default {
             this.checkedNames = [];
             this.update_score()
             
-            if(this.qid >= this.thequiz.length) {
-              // switch to video screen here and show score for a user 
-              
-              this.$router.push({ name: 'Videos', 
-               params: { 
-                  
-                  
-                   username: this.username
-                   }
-                });
-            }
-            
+           
         }
         else {
             alert('WRONG')
@@ -116,10 +106,22 @@ export default {
             QuizID: this.thequiz[this.qid-1].id,
             attempts: String(this.nattempts)
           }
-        }).then(result=> {
+        }).then(
+          result=> {
           alert(result);
+          this.lastscore = result
         });
         this.nattempts = 0;
+         if(this.qid >= this.thequiz.length) {
+              // switch to video screen here and show score for a user 
+              
+              this.$router.push({ name: 'Videos', 
+               params: { 
+                   username: this.username,
+                   score: this.lastscore
+                   }
+                });
+            }
       }
       catch(error) {
         alert(`ERROR: ${error}`);
