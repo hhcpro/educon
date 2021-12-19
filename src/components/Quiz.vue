@@ -80,6 +80,19 @@ export default {
             this.submitValue = '';
             this.checkedNames = [];
             this.update_score()
+            
+            if(this.qid >= this.thequiz.length) {
+              // switch to video screen here and show score for a user 
+              
+              this.$router.push({ name: 'Videos', 
+               params: { 
+                  
+                  
+                   username: this.username
+                   }
+                });
+            }
+            
         }
         else {
             alert('WRONG')
