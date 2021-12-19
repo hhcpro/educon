@@ -5,7 +5,7 @@
             <td>
                 <tr>
                     <h2>Latest Score for User: {{ userid }}</h2>
-                    <h3 v-bind:class="score">{{ score }} </h3>
+                    <h3>Score {{ score }} </h3>
                 </tr>
             </td>
         </table>

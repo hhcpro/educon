@@ -61,7 +61,8 @@ export default {
                 alert('Successfully logged in'); 
                 this.$router.push({ name: 'Videos', 
                 params: { 
-                   username: this.username
+                   username: this.username,
+                   score: 'Not defined'
                    }
                 });
             } catch (error) {
