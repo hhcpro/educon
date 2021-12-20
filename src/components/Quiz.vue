@@ -75,7 +75,7 @@ export default {
         }
         
         if ((this.submitValue-1) ===   this.thequiz[this.qid].QuizOptions.Answer) {
-            alert('BINGO')
+            alert('Correct!!')
             this.nattempts+=1
             this.qid+=1;
             this.submitValue = '';
@@ -84,20 +84,22 @@ export default {
                        
         }
         else {
-            alert('WRONG')
             this.nattempts+=1
-            if(this.nattempts >= 5) {
-              // stop playing send report and move to another q if exists
-              this.qid+=1;
-              this.submitValue = '';
-              this.checkedNames = [];
-              this.nattempts=0
-              this.update_score()
+            alert('Incorrect answer attempt #' + (this.nattempts))
+            if((this.nattempts) >= 5) {
+                // stop playing send report and move to another q if exists
+                this.qid+=1;
+                this.submitValue = '';
+                this.checkedNames = [];
+                console.log('Reset nattemaps to 0')
+                this.nattempts=0
+                this.update_score()
             }
         }
+        
     },
     async update_score() {
-      console.log('Notify backend....')
+      console.log('Notify backend.... attempts #' + this.nattempts)
 
       try {
         
