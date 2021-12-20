@@ -89,6 +89,9 @@ export default {
             this.nattempts+=1
             if(this.nattempts >= 5) {
               // stop playing send report and move to another q if exists
+              this.qid+=1;
+              this.submitValue = '';
+              this.checkedNames = [];
               this.update_score()
             }
         }
@@ -112,7 +115,8 @@ export default {
           this.lastscore = result
         });
         this.nattempts = 0;
-         if(this.qid >= this.thequiz.length) {
+         console.log('Check qid=' + this.qid + ', lan=' + this.thequiz.length)
+         if((this.qid >= this.thequiz.length) || (this.nattempts >= 5)) {
               // switch to video screen here and show score for a user 
               
               this.$router.push({ name: 'Videos', 
