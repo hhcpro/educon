@@ -59,8 +59,13 @@ def handler(event, context):
       score = (comp/natt) + last_score
       print("Calculated score %.2f=%.2f/%.2f + %.2f" % (score, comp, natt, last_score))
     else:
-      score = last_score - comp
-      print("Failed class score: %.2f = %.2f - %.2f" % (score, last_score, comp))
+      if last_score > 0:
+        score = last_score - comp
+        print("Failed class score: %.2f = %.2f - %.2f" % (score, last_score, comp))
+      else:
+        score = 0
+        print("Zero score for the class")
+      
     
 
     rupdate = user_table.update_item(
