@@ -81,8 +81,7 @@ export default {
             this.submitValue = '';
             this.checkedNames = [];
             this.update_score()
-            
-           
+                       
         }
         else {
             alert('WRONG')
@@ -92,6 +91,7 @@ export default {
               this.qid+=1;
               this.submitValue = '';
               this.checkedNames = [];
+              this.nattempts=0
               this.update_score()
             }
         }
