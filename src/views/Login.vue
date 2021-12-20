@@ -58,7 +58,7 @@ export default {
                     }
                 });
                 console.log('the user', user);
-                alert('Successfully logged in'); 
+                //alert('Successfully logged in'); 
                 this.$router.push({ name: 'Videos', 
                 params: { 
                    username: this.username,
