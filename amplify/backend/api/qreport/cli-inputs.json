@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "paths": {
+    "/user/quiz/report": {
+      "permissions": {
+        "setting": "open"
+      },
+      "lambdaFunction": "qreport"
+    }
+  }
+}

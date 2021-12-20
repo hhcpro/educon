@@ -55,8 +55,12 @@ def handler(event, context):
     # dump formula uses complexity of a quiz and # of attempts
     comp = float(qdata[0]['complexity'])
     natt = float(output['attempts'])
-    score = (comp/natt) + last_score
-    print("Calculated score %.2f=%.2f/%.2f + %.2f" % (score, comp, natt, last_score))
+    if natt != 0:
+      score = (comp/natt) + last_score
+      print("Calculated score %.2f=%.2f/%.2f + %.2f" % (score, comp, natt, last_score))
+    else:
+      score = last_score - comp
+      print("Failed class score: %.2f = %.2f - %.2f" % (score, last_score, comp))
     
 
     rupdate = user_table.update_item(
