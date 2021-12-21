@@ -102,6 +102,7 @@ export default {
                     .filter( q => q.videosID === this.myVideos[this.playchoice].id)
             
                console.log(qres);
+               console.log('Frame='+ this.myVideos[this.playchoice].URL)
                this.theQuiz = qres
                this.$router.push({ name: 'Mainframe', 
                params: { 

@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "UserProfile": {
-            "name": "UserProfile",
+        "ClassStat": {
+            "name": "ClassStat",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,31 +10,23 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "user_name": {
-                    "name": "user_name",
+                "Videos": {
+                    "name": "Videos",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "model": "Videos"
+                    },
                     "isRequired": false,
-                    "attributes": []
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "classStatVideosId"
+                    }
                 },
-                "user_email": {
-                    "name": "user_email",
+                "userprofileID": {
+                    "name": "userprofileID",
                     "isArray": false,
-                    "type": "AWSEmail",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "top_score": {
-                    "name": "top_score",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "last_class": {
-                    "name": "last_class",
-                    "isArray": false,
-                    "type": "String",
+                    "type": "ID",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -56,11 +48,20 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "UserProfiles",
+            "pluralName": "ClassStats",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUserProfile",
+                        "fields": [
+                            "userprofileID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -80,8 +81,8 @@ export const schema = {
                 }
             ]
         },
-        "QuizOptions": {
-            "name": "QuizOptions",
+        "Videos": {
+            "name": "Videos",
             "fields": {
                 "id": {
                     "name": "id",
@@ -90,38 +91,38 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "Opt1": {
-                    "name": "Opt1",
+                "filename": {
+                    "name": "filename",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "Opt2": {
-                    "name": "Opt2",
+                "category": {
+                    "name": "category",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "Opt3": {
-                    "name": "Opt3",
+                "Quizes": {
+                    "name": "Quizes",
+                    "isArray": true,
+                    "type": {
+                        "model": "Quizes"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "videosID"
+                    }
+                },
+                "URL": {
+                    "name": "URL",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Opt4": {
-                    "name": "Opt4",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Answer": {
-                    "name": "Answer",
-                    "isArray": false,
-                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -143,7 +144,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "QuizOptions",
+            "pluralName": "Videos",
             "attributes": [
                 {
                     "type": "model",
@@ -262,6 +263,187 @@ export const schema = {
                 }
             ]
         },
+        "QuizOptions": {
+            "name": "QuizOptions",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Opt1": {
+                    "name": "Opt1",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Opt2": {
+                    "name": "Opt2",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Opt3": {
+                    "name": "Opt3",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Opt4": {
+                    "name": "Opt4",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Answer": {
+                    "name": "Answer",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "QuizOptions",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "UserProfile": {
+            "name": "UserProfile",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "user_name": {
+                    "name": "user_name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "user_email": {
+                    "name": "user_email",
+                    "isArray": false,
+                    "type": "AWSEmail",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "top_score": {
+                    "name": "top_score",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "last_class": {
+                    "name": "last_class",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ClassStats": {
+                    "name": "ClassStats",
+                    "isArray": true,
+                    "type": {
+                        "model": "ClassStat"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "userprofileID"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "UserProfiles",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Notes": {
             "name": "Notes",
             "fields": {
@@ -320,96 +502,9 @@ export const schema = {
                     }
                 }
             ]
-        },
-        "Videos": {
-            "name": "Videos",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "filename": {
-                    "name": "filename",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "category": {
-                    "name": "category",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "URL": {
-                    "name": "URL",
-                    "isArray": false,
-                    "type": "AWSURL",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Quizes": {
-                    "name": "Quizes",
-                    "isArray": true,
-                    "type": {
-                        "model": "Quizes"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "videosID"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "Videos",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "4641811dce33442712692ed7d0775fb8"
+    "version": "c23a76e221e2f9342e3b245eb8d6b10f"
 };

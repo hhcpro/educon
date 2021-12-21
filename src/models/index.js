@@ -4,12 +4,13 @@ import { schema } from './schema';
 
 
 
-const { UserProfile, QuizOptions, Quizes, Notes, Videos } = initSchema(schema);
+const { ClassStat, Videos, Quizes, QuizOptions, UserProfile, Notes } = initSchema(schema);
 
 export {
-  UserProfile,
-  QuizOptions,
+  ClassStat,
+  Videos,
   Quizes,
-  Notes,
-  Videos
+  QuizOptions,
+  UserProfile,
+  Notes
 };
