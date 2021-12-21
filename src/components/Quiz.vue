@@ -113,7 +113,7 @@ export default {
           }
         }).then(
           result=> {
-          alert(result);
+          //alert(result);
           this.lastscore = result
         });
         this.nattempts = 0;

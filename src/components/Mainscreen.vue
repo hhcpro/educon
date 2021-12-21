@@ -1,6 +1,8 @@
 <template>
 <div>
-    <iframe width="1400" height="600" :src="URL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; gyroscope; picture-in-picture" allowfullscreen>
+    <iframe width="1400" height="600" :src="URL" title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; gyroscope; picture-in-picture" allowfullscreen>
     </iframe>
 </div>
 </template>
