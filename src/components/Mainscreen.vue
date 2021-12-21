@@ -1,24 +1,7 @@
 <template>
-<div class="embed-responsive" :class="[css]" 
-        :style="{
-        'width': '100%',
-        'margin' :'0 auto'  
-        }">
-    <video-embed 
-        :src="URL"
-        autoplay=1
-        :style="{
-            
-            
-            'border-style': 'solid',
-            'border-width': '2px',
-            'border-radius': '4px',
-            'padding': '15px',
-            'width': '1400px',
-            'height' : '600px',
-            'margin': '0 auto'
-        }">
-    </video-embed>
+<div>
+    <iframe width="1400" height="600" :src="URL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; gyroscope; picture-in-picture" allowfullscreen>
+    </iframe>
 </div>
 </template>
 
@@ -36,12 +19,13 @@ export default {
             },
     URL: String
       
-  }
-  /*,
-  data() {
-      apiKey: 'AIzaSyBz0jeyQSoJKXGvpudQ4R4HpTu9-V1AVBM';
-      clientId: '';
-  }*/,
+  },
+  
+  //data() {
+    //  return { 
+      //    playurl=String('https://www.youtube.com/embed/'+URL+'?autoplay=1')
+     // }
+  //},
   created() {
       console.log('Calling created in SCreen')
       console.log(this.URL)

@@ -1,9 +1,16 @@
+type ClassStat @model @auth(rules: [{allow: public}]) @key(name: "byUserProfile", fields: ["userprofileID"]) {
+  id: ID!
+  Videos: Videos @connection
+  userprofileID: ID
+}
+
 type UserProfile @model @auth(rules: [{allow: public}]) {
   id: ID!
   user_name: String
   user_email: AWSEmail
   top_score: String
   last_class: String
+  ClassStats: [ClassStat] @connection(keyName: "byUserProfile", fields: ["id"])
 }
 
 type QuizOptions @model @auth(rules: [{allow: public}]) {
@@ -32,7 +39,7 @@ type Videos @model @auth(rules: [{allow: public}]) {
   id: ID!
   filename: String
   category: String
-  URL: AWSURL
   Quizes: [Quizes] @connection(keyName: "byVideos", fields: ["id"])
+  URL: String
 }
  

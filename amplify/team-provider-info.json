@@ -18,11 +18,11 @@
       "function": {
         "fcolcap": {
           "deploymentBucketName": "amplify-educon-dev-164213-deployment",
-          "s3Key": "amplify-builds/fcolcap-70746445314631463567-build.zip"
+          "s3Key": "amplify-builds/fcolcap-58754633755073527161-build.zip"
         },
         "qreport": {
           "deploymentBucketName": "amplify-educon-dev-164213-deployment",
-          "s3Key": "amplify-builds/qreport-706a70374b5473796b66-build.zip"
+          "s3Key": "amplify-builds/qreport-3233367a484672445a7a-build.zip"
         }
       }
     }
