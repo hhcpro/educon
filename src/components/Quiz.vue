@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="onSubmit">
-      
+<button @click='verify'>Check</button>      
       <table>
           <tr>
              <h2>Question # {{ qid+1 }}: {{ thequiz[qid].Question }} ? </h2>
@@ -8,24 +8,24 @@
           <td>
          <tr>
             <input type="radio" id="1" value="1" v-model="checkedNames">
-            <label for="Option #4">{{ thequiz[qid].QuizOptions.Opt1 }}</label>
+            <label for="Option #1">{{ thequiz[qid].QuizOptions.Opt1 }}</label>
         </tr>
         <tr>
             <input type="radio" id="2" value="2" v-model="checkedNames">
-            <label for="Option #5">{{ thequiz[qid].QuizOptions.Opt2 }}</label>
+            <label for="Option #2">{{ thequiz[qid].QuizOptions.Opt2 }}</label>
         </tr>
         <tr>
             <input type="radio" id="3" value="3" v-model="checkedNames">
-            <label for="Option #5">{{ thequiz[qid].QuizOptions.Opt3 }}</label>
+            <label for="Option #3">{{ thequiz[qid].QuizOptions.Opt3 }}</label>
         </tr>
         <tr>
             <input type="radio" id="4" value="4" v-model="checkedNames">
-            <label for="Option #5">{{ thequiz[qid].QuizOptions.Opt4 }}</label>
+            <label for="Option #4">{{ thequiz[qid].QuizOptions.Opt4 }}</label>
         </tr>
         </td>
+        
     </table>
-    <button @click='verify'>Check</button><br>
-    
+      
   </form>
 </template>
 
