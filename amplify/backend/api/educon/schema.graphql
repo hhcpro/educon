@@ -1,3 +1,31 @@
+type MQCorrectList @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  MQCorrectAnswers: [MQCorrectAnswer] @connection(keyName: "byMQCorrectList", fields: ["id"])
+}
+
+type MQCorrectAnswer @model @auth(rules: [{allow: public}]) @key(name: "byMQCorrectList", fields: ["mqcorrectlistID"]) {
+  id: ID!
+  Aindex: Int
+  mqcorrectlistID: ID
+}
+
+type MQAnswer @model @auth(rules: [{allow: public}]) @key(name: "byMQuizAsnersList", fields: ["mquizasnerslistID"]) {
+  id: ID!
+  Answer: String
+  mquizasnerslistID: ID
+}
+
+type MQuizAsnersList @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  untitledfield: String
+  MQAnswers: [MQAnswer] @connection(keyName: "byMQuizAsnersList", fields: ["id"])
+}
+
+enum QType {
+  SINGLE
+  MULTIPLE
+}
+
 type ClassStat @model @auth(rules: [{allow: public}]) @key(name: "byUserProfile", fields: ["userprofileID"]) {
   id: ID!
   Videos: Videos @connection
@@ -20,6 +48,9 @@ type QuizOptions @model @auth(rules: [{allow: public}]) {
   Opt3: String
   Opt4: String
   Answer: Int
+  qtype: QType
+  MQCorrectList: MQCorrectList @connection
+  MQuizAsnersList: MQuizAsnersList @connection
 }
 
 type Quizes @model @auth(rules: [{allow: public}]) @key(name: "byVideos", fields: ["videosID"]) {

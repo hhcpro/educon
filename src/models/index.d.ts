@@ -1,8 +1,27 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
+export enum QType {
+  SINGLE = "SINGLE",
+  MULTIPLE = "MULTIPLE"
+}
 
 
 
+type MQCorrectListMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type MQCorrectAnswerMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type MQAnswerMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type MQuizAsnersListMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
 
 type ClassStatMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
@@ -26,6 +45,45 @@ type UserProfileMetaData = {
 
 type NotesMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+export declare class MQCorrectList {
+  readonly id: string;
+  readonly MQCorrectAnswers?: (MQCorrectAnswer | null)[];
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<MQCorrectList, MQCorrectListMetaData>);
+  static copyOf(source: MQCorrectList, mutator: (draft: MutableModel<MQCorrectList, MQCorrectListMetaData>) => MutableModel<MQCorrectList, MQCorrectListMetaData> | void): MQCorrectList;
+}
+
+export declare class MQCorrectAnswer {
+  readonly id: string;
+  readonly Aindex?: number;
+  readonly mqcorrectlistID?: string;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<MQCorrectAnswer, MQCorrectAnswerMetaData>);
+  static copyOf(source: MQCorrectAnswer, mutator: (draft: MutableModel<MQCorrectAnswer, MQCorrectAnswerMetaData>) => MutableModel<MQCorrectAnswer, MQCorrectAnswerMetaData> | void): MQCorrectAnswer;
+}
+
+export declare class MQAnswer {
+  readonly id: string;
+  readonly Answer?: string;
+  readonly mquizasnerslistID?: string;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<MQAnswer, MQAnswerMetaData>);
+  static copyOf(source: MQAnswer, mutator: (draft: MutableModel<MQAnswer, MQAnswerMetaData>) => MutableModel<MQAnswer, MQAnswerMetaData> | void): MQAnswer;
+}
+
+export declare class MQuizAsnersList {
+  readonly id: string;
+  readonly untitledfield?: string;
+  readonly MQAnswers?: (MQAnswer | null)[];
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<MQuizAsnersList, MQuizAsnersListMetaData>);
+  static copyOf(source: MQuizAsnersList, mutator: (draft: MutableModel<MQuizAsnersList, MQuizAsnersListMetaData>) => MutableModel<MQuizAsnersList, MQuizAsnersListMetaData> | void): MQuizAsnersList;
 }
 
 export declare class ClassStat {
@@ -69,6 +127,9 @@ export declare class QuizOptions {
   readonly Opt3?: string;
   readonly Opt4?: string;
   readonly Answer?: number;
+  readonly qtype?: QType | keyof typeof QType;
+  readonly MQCorrectList?: MQCorrectList;
+  readonly MQuizAsnersList?: MQuizAsnersList;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<QuizOptions, QuizOptionsMetaData>);

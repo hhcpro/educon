@@ -3,7 +3,7 @@
     <h1>User: {{ username }} </h1>
     <Mainscreen :URL="frame"/>
     <Quiz :thequiz="quiz" :username="username"/>
-    <Scorecard :userid="username"/>
+    <!-- Scorecard :userid="username"/ -->
     <p/>
     <!--Notepad id='n' msg="Class Notes" :style="{
         background: blue
@@ -16,7 +16,7 @@
 
 import Quiz from '@/components/Quiz.vue';
 import Mainscreen from '@/components/Mainscreen.vue';
-import Scorecard from '@/components/Scorecard.vue';
+//import Scorecard from '@/components/Scorecard.vue';
 
 
 export default {
@@ -28,8 +28,8 @@ export default {
   },
   components: {
     Mainscreen,
-    Quiz,
-    Scorecard
+    Quiz
+    //Scorecard
   },
   
   created(){
